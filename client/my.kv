@@ -1,0 +1,43 @@
+<MyWidget>:
+  MDBoxLayout:
+    orientation:'vertical'
+    DrawingSpace:
+      id: _drawing_space
+      canvas.before:
+        Color:
+          rgba: 1, 1, 1, 1
+        Rectangle:
+          pos: self.pos
+          size: self.size
+    TextInput:
+      id: textl
+      disabled: True
+      font_size: dp(20)
+      size_hint: None,None
+      width: root.width
+    MDBoxLayout:
+      orientation: 'horizontal'
+      size_hint: None,None
+      spacing:20
+      padding: 50,10
+      MDRaisedButton:
+        text:'Clear'
+        on_press: app.clear(*args)
+      MDRaisedButton:
+        text:'Calculate'
+        on_press: app.save(*args)
+        on_release: app.send_file(*args)
+      DrawPencil:
+        drawing_space: _drawing_space
+        pencil_active: pencil_button.state=='down'
+      UseRubber:
+        drawing_space: _drawing_space
+        rubber_active: rubber.state=='down'
+      MyToggleButton:
+        id: pencil_button
+        text: "Pensil"
+        group: 'tools'
+      MyToggleButton:
+        id: rubber
+        text: "Rubber"
+        group: 'tools'
